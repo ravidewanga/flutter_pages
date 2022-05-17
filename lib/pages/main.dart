@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pages/pages/error_screen_list.dart';
 import 'package:flutter_pages/pages/login.dart';
+import 'package:flutter_pages/pages/otp_page.dart';
 import 'package:flutter_pages/providers/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
 class Main extends StatefulWidget {
@@ -22,11 +24,19 @@ class _MainState extends State<Main> {
       body: Scaffold(
         body: ListView(
           children: [
-            Checkbox(
-              value: themeChange.darkTheme,
-              onChanged: (bool? value) {
-                themeChange.darkTheme = value!;
-              }
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Text("Dark Mode: "),
+                Switch(
+                    value: themeChange.darkTheme,
+                    activeColor:Colors.green,
+                    onChanged: (bool? value) {
+                      themeChange.darkTheme = value!;
+                    }
+                ),
+              ],
             ),
 
             InkWell(
@@ -40,6 +50,31 @@ class _MainState extends State<Main> {
                 title: Text('Login Page'),
               ),
             ),
+
+            InkWell(
+              onTap:(){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const OtpPage()),
+                );
+              },
+              child: const ListTile(
+                title: Text('OTP Page'),
+              ),
+            ),
+
+            InkWell(
+              onTap:(){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ErrorScreenList()),
+                );
+              },
+              child: const ListTile(
+                title: Text('Error Pages'),
+              ),
+            ),
+
           ],
         ),
       ),
